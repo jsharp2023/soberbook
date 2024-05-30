@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/soberbook/static/css/main.976f9d07.css",
+    "main.js": "/soberbook/static/js/main.f5706d11.js",
+    "index.html": "/soberbook/index.html",
+    "main.976f9d07.css.map": "/soberbook/static/css/main.976f9d07.css.map",
+    "main.f5706d11.js.map": "/soberbook/static/js/main.f5706d11.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.976f9d07.css",
+    "static/js/main.f5706d11.js"
+  ]
+}
