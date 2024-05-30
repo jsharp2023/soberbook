@@ -1,0 +1,16 @@
+/* src/components/NewPost/NewPost.module.css */
+
+.newPostContainer {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .submitButton {
+    margin-top: 16px;
+  }
+  

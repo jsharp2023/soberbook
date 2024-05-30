@@ -1,0 +1,25 @@
+.profilePage {
+    margin-top: 20px;
+  }
+  
+  .avatarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .saveButton {
+    margin-top: 20px;
+  }
+  
+    

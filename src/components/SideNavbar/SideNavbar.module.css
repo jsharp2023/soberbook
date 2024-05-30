@@ -1,0 +1,66 @@
+.drawerPaper {
+    width: 250px;
+    background-color: #70b0f0;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .drawerPaper.dark {
+    background-color: #343a40;
+    color: #e81616;
+  }
+  
+  .toolbar {
+    height: 64px;
+  }
+  
+  .sidebarList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebarItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebarItem:hover {
+    background-color: #e9ecef;
+  }
+  
+  .drawerPaper.dark .sidebarItem:hover {
+    background-color: #495057;
+  }
+  
+  .loginButton {
+    display: flex;
+    align-items: center;
+    background: hotpink;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .loginButton:hover {
+    background-color: #e9ecef;
+  }
+  
+  .drawerPaper.dark .loginButton:hover {
+    background-color: #495057;
+  }
+  
+  .sidebarItem .fa {
+    margin-right: 10px;
+  }
+  
+  .one {
+    background-color:red;
+  }
+  
+    

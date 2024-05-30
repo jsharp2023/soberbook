@@ -1,0 +1,11 @@
+.homePage {
+    margin-top: 20px;
+  }
+  
+  
+  .homePage.dark {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+    
