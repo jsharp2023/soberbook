@@ -1,4 +1,14 @@
 .commentCard {
-    margin-bottom: 10px;
-  }
-  
+  margin-bottom: 10px;
+  height: 100%;
+  padding: 10px; /* Optional: Add padding for better visual appearance */
+  border: 1px solid #e0e0e0; /* Optional: Add border */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for pop effect */
+  background-color: #fff; /* Background color */
+}
+
+.commentCard.dark {
+  background-color: #333; /* Dark mode background color */
+  color: #fff; /* Dark mode text color */
+}

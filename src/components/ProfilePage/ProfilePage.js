@@ -1,115 +1,93 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Avatar } from '@mui/material';
-import styles from './ProfilePage.module.css';
+import { Modal, Box, Avatar, TextField, Button, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile, updateAvatar } from '../../reducers/profileSlice';
 
-const ProfilePage = ({ toggleProfile }) => {
-  const [profile, setProfile] = useState({
-    profilePic: '',
-    name: '',
-    nickname: '',
-    birthday: '',
-    state: '',
-    bio: '',
-    interests: '',
+const ProfilePage = ({ open, handleClose, user }) => {
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile);
+  const [avatar, setAvatar] = useState(profile?.avatar || '');
+  const [profileData, setProfileData] = useState({
+    name: profile?.name || '',
+    birthday: profile?.birthday || '',
+    state: profile?.state || '',
+    sobrietyYears: profile?.sobrietyYears || '',
   });
+
+  const handleSave = () => {
+    dispatch(updateProfile(profileData));
+    handleClose();
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        setAvatar(result);
+        dispatch(updateAvatar(result));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile({
-      ...profile,
+    setProfileData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Save profile data
-    toggleProfile();
-  };
-
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfile({
-        ...profile,
-        profilePic: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
+    }));
   };
 
   return (
-    <Container maxWidth="sm" className={styles.profilePage}>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.avatarContainer}>
-          <Avatar src={profile.profilePic} className={styles.avatar} />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleProfilePicChange}
-            className={styles.fileInput}
-          />
-        </div>
+    <Modal open={open} onClose={handleClose}>
+      <Box sx={{ padding: 4, bgcolor: 'background.paper', borderRadius: 2, width: '400px', margin: 'auto', marginTop: '1%' }}>
+        <Typography variant="h6" gutterBottom>
+          Edit Profile
+        </Typography>
+        <Avatar src={avatar} sx={{ width: 56, height: 56, marginBottom: 2 }} />
+        <Button variant="contained" component="label">
+          Upload Avatar
+          <input type="file" hidden onChange={handleAvatarChange} />
+        </Button>
         <TextField
           label="Name"
           name="name"
-          value={profile.name}
+          value={profileData.name}
           onChange={handleChange}
           fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Nickname"
-          name="nickname"
-          value={profile.nickname}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
+          margin="dense"
         />
         <TextField
           label="Birthday"
           name="birthday"
-          type="date"
-          value={profile.birthday}
+          value={profileData.birthday}
           onChange={handleChange}
           fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          margin="dense"
         />
         <TextField
           label="State"
           name="state"
-          value={profile.state}
+          value={profileData.state}
           onChange={handleChange}
           fullWidth
-          margin="normal"
+          margin="dense"
         />
         <TextField
-          label="Bio"
-          name="bio"
-          multiline
-          rows={4}
-          value={profile.bio}
+          label="Sobriety Years"
+          name="sobrietyYears"
+          value={profileData.sobrietyYears}
           onChange={handleChange}
           fullWidth
-          margin="normal"
+          margin="dense"
         />
-        <TextField
-          label="Interests"
-          name="interests"
-          value={profile.interests}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <Button type="submit" variant="contained" color="primary" className={styles.saveButton}>
+        <Button onClick={handleSave} variant="contained" color="primary" sx={{ marginTop: 2 }}>
           Save
         </Button>
-      </form>
-    </Container>
+      </Box>
+    </Modal>
   );
 };
 

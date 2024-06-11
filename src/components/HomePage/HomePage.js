@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
 import { fetchPosts } from '../../reducers/postSlice';
-import Post from '../Post/Post';
 import NewPost from '../NewPost/NewPost';
+import PostsContainer from '../PostsContainer/PostsContainer';
+import SideNavbar from '../SideNavbar/SideNavbar';
+import ProfilePage from '../ProfilePage/ProfilePage';
+import useGoogleAuth from '../../api/authService';
+import styles from './HomePage.module.css';
+import { selectUserProfile } from '../../reducers/profileSlice';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.items);
   const postStatus = useSelector((state) => state.posts.status);
   const error = useSelector((state) => state.posts.error);
+  const userProfile = useSelector(selectUserProfile);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const { signIn, signOut } = useGoogleAuth();
 
   useEffect(() => {
     if (postStatus === 'idle') {
@@ -17,34 +25,57 @@ const HomePage = () => {
     }
   }, [postStatus, dispatch]);
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const handleProfileOpen = () => {
+    setIsProfileModalOpen(true);
+  };
+
+  const handleProfileClose = () => {
+    setIsProfileModalOpen(false);
+  };
+
   let content;
 
   if (postStatus === 'loading') {
-    content = <div>Loading...</div>;
+    content = <Typography variant="h6">Loading...</Typography>;
   } else if (postStatus === 'succeeded') {
-    content = posts.map((post) => (
-      <Grid item xs={12} key={post.id}>
-        <Post post={post} />
-      </Grid>
-    ));
+    content = <PostsContainer />;
   } else if (postStatus === 'failed') {
-    content = <div>{error}</div>;
+    content = <Typography variant="h6" color="error">{`Error: ${error}`}</Typography>;
   }
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Create a New Post
-      </Typography>
-      <NewPost />
-      <Typography variant="h4" gutterBottom>
-        Posts
-      </Typography>
-      <Grid container spacing={3}>
-        {content}
-      </Grid>
-    </Container>
+    <div className={`${styles.container} ${isDarkMode ? styles.dark : ''}`}>
+      <SideNavbar
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+        onProfileClick={handleProfileOpen}
+        user={userProfile}
+        signIn={signIn}
+        signOut={signOut}
+      />
+      <div className={styles.content}>
+        <Container>
+          <NewPost isDarkMode={isDarkMode} />
+          {content}
+        </Container>
+      </div>
+      <ProfilePage
+        open={isProfileModalOpen}
+        handleClose={handleProfileClose}
+        user={userProfile}
+      />
+      {!userProfile.name && (
+        <Button onClick={signIn} variant="contained" color="primary">
+          Sign in with Google
+        </Button>
+      )}
+    </div>
   );
 };
 
 export default HomePage;
+

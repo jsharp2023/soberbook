@@ -1,16 +1,122 @@
-/* src/components/NewPost/NewPost.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 64px; /* To ensure it's below the header */
+}
+
+.content {
+  width: 100%;
+  max-width: 16px; /* Adjust to the desired width */
+  padding: 16px;
+  box-sizing: border-box;
+}
 
 .newPostContainer {
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .submitButton {
-    margin-top: 16px;
-  }
-  
+  padding: 16px;
+  margin-bottom: 32px; /* Increased from 16px to 32px for more space */
+  margin-top: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: whitesmoke;
+  color: #000;
+}
+
+.newPost.dark {
+  background-color: #333;
+  border-color: #555;
+  color: #fff;
+}
+
+.dark .MuiTypography-root,
+.dark .MuiTextField-root,
+.dark .MuiButton-root {
+  color: #fff;
+  border-color: #555;
+}
+
+.dark .MuiInputBase-input {
+  color: #fff;
+}
+
+.dark .MuiButton-containedPrimary {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark .MuiButton-containedSecondary {
+  background-color: #555;
+  color: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submitButton {
+  margin-top: 16px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #303f9f;
+}
+
+.post {
+  margin-bottom: 20px; /* Increased space between posts */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f6eded;
+}
+
+.post.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.commentBox {
+  padding: 16px;
+}
+
+.comments {
+  margin-top: 16px;
+  padding-left: 16px;
+  border-left: 2px solid #ddd;
+}
+
+/* New button styles */
+.button {
+  font-size: 14px;
+  padding: 8px 12px;
+  margin: 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button.like {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.button.like:hover {
+  background-color: #d6e0ff;
+  color: #000;
+}
+
+.button.comment {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.button.comment:hover {
+  background-color: #ffd6d6;
+  color: #000;
+}

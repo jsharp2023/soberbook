@@ -1,21 +1,40 @@
-import { useGoogleLogin } from 'react-google-login';
+import { useState } from 'react';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
-const clientId = 'Y551863709566-0ipt36927brc8nl0fc3q1d80er7k1jrt.apps.googleusercontent.com';
+const useGoogleAuth = () => {
+  const [user, setUser] = useState(null);
 
-export const useGoogleAuth = () => {
-const onSuccess = (res) => {
-console.log('Login Success: currentUser:', res.profileObj);
-};
-const onFailure = (res) => {
-console.log('Login failed: res:', res);
-};
-const { signIn } = useGoogleLogin({
-onSuccess,
-onFailure,
-clientId,
-isSignedIn: true,
-accessType: 'offline'
-});
+  const onSuccess = (tokenResponse) => {
+    fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: {
+        Authorization: `Bearer ${tokenResponse.access_token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((profile) => {
+        const userData = {
+          name: profile.name,
+          avatar: profile.picture,
+        };
+        setUser(userData);
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
+  };
 
-return { signIn };
+  const onFailure = (error) => {
+    console.log('Login failed:', error);
+  };
+
+  const signIn = useGoogleLogin({ onSuccess, onFailure });
+
+  const signOut = () => {
+    googleLogout();
+    setUser(null);
+  };
+
+  return { signIn, signOut, user };
 };
+
+export default useGoogleAuth;

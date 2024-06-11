@@ -1,4 +1,11 @@
 .postList {
-    margin-top: 20px;
-  }
+  padding: 20px; /* Add padding around the container */
+  margin-top: 20px; /* Add margin at the top */
+  margin-bottom: 20px; /* Add margin at the bottom */
   
+}
+
+.postList.dark {
+  background-color: #2c2c2c; /* Optional: Dark mode background color */
+  color: #ffffff; /* Optional: Dark mode text color */
+}
