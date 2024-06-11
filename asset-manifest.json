@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/soberbook/static/css/main.58ab4caf.css",
-    "main.js": "/soberbook/static/js/main.9bad093e.js",
+    "main.css": "/soberbook/static/css/main.dd13efbc.css",
+    "main.js": "/soberbook/static/js/main.7bb5ce75.js",
     "static/media/logo.png": "/soberbook/static/media/logo.cfa92f14d63eaa5c284b.png",
     "index.html": "/soberbook/index.html",
-    "main.58ab4caf.css.map": "/soberbook/static/css/main.58ab4caf.css.map",
-    "main.9bad093e.js.map": "/soberbook/static/js/main.9bad093e.js.map"
+    "main.dd13efbc.css.map": "/soberbook/static/css/main.dd13efbc.css.map",
+    "main.7bb5ce75.js.map": "/soberbook/static/js/main.7bb5ce75.js.map"
   },
   "entrypoints": [
-    "static/css/main.58ab4caf.css",
-    "static/js/main.9bad093e.js"
+    "static/css/main.dd13efbc.css",
+    "static/js/main.7bb5ce75.js"
   ]
 }
