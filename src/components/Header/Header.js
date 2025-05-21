@@ -1,44 +1,20 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import logo from '../../assets/logo.png'; // Adjust the path as needed
-
-const useStyles = makeStyles(() => ({
-  title: {
-    flexGrow: 1,
-    textAlign: 'center',
-    fontFamily: 'Protest Revolution, sans-serif',
-  },
-  logo: {
-    width: 180,
-    height: 160, // Adjust the size as needed
-  },
-  darkAppBar: {
-    backgroundColor: '#333', // Dark mode background color
-    color: '#fff', // Dark mode text color
-    zIndex: 10, // Ensure header is in front
-    position: 'relative', // Ensure position context
-  },
-  lightAppBar: {
-    backgroundColor: '#3f51b5', // Light mode background color
-    color: '#fff', // Light mode text color
-    zIndex: 10, // Ensure header is in front
-    position: 'relative', // Ensure position context
-  },
-}));
+import logo from '../../assets/logo.png'; // adjust path if needed
 
 const Header = ({ isDarkMode }) => {
-  const classes = useStyles();
-
   return (
-    <AppBar position="static" className={isDarkMode ? classes.darkAppBar : classes.lightAppBar}>
-      <Toolbar>
-        <img src={logo} alt="SoberBook Logo" className={classes.logo} />
-        <Typography variant="h3" className={classes.title}>
+    <header className={`z-10 relative ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-blue-700 text-white'}`}>
+      <div className="flex items-center justify-center py-4 px-6">
+        <img
+          src={logo}
+          alt="SoberBook Logo"
+          className="w-44 h-40 object-contain"
+        />
+        <h1 className="text-4xl font-bold font-[Protest_Revolution] text-center ml-4">
           SOBERBOOK
-        </Typography>
-      </Toolbar>
-    </AppBar>
+        </h1>
+      </div>
+    </header>
   );
 };
 

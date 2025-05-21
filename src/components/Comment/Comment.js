@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Card, CardContent, Typography, Button, CardActions, TextField, Collapse } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardActions,
+  TextField,
+  Collapse
+} from '@mui/material';
 import { addLike, addComment } from '../../reducers/postSlice';
-import styles from './Post.module.css';
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
@@ -26,7 +33,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <Card className={styles.post}>
+    <div className="mb-4 h-full p-4 border border-gray-300 rounded-lg shadow-md bg-white dark:bg-gray-800 dark:text-white">
       <CardContent>
         <Typography variant="h5" component="div">
           {post.title}
@@ -35,6 +42,7 @@ const Post = ({ post }) => {
           {post.body}
         </Typography>
       </CardContent>
+
       <CardActions>
         <Button size="small" color="primary" onClick={handleLike}>
           Like {post.likes || 0}
@@ -43,8 +51,9 @@ const Post = ({ post }) => {
           Comment
         </Button>
       </CardActions>
+
       <Collapse in={showCommentBox}>
-        <div className={styles.commentBox}>
+        <div className="mt-2 space-y-2">
           <TextField
             label="Add a comment"
             value={comment}
@@ -55,8 +64,9 @@ const Post = ({ post }) => {
             Submit
           </Button>
         </div>
+
         {post.comments && post.comments.length > 0 && (
-          <div className={styles.comments}>
+          <div className="mt-2 text-sm space-y-1 text-gray-700 dark:text-gray-300">
             {post.comments.map((comment, index) => (
               <Typography key={index} variant="body2">
                 {comment}
@@ -65,9 +75,8 @@ const Post = ({ post }) => {
           </div>
         )}
       </Collapse>
-    </Card>
+    </div>
   );
 };
 
 export default Post;
-

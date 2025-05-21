@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, CircularProgress } from '@mui/material';
 import { fetchPosts, selectPosts } from '../../reducers/postSlice';
 import Post from '../Post/Post';
 
@@ -18,23 +17,30 @@ const PostsContainer = () => {
   let content;
 
   if (postStatus === 'loading') {
-    content = <CircularProgress />;
+    content = (
+      <div className="flex justify-center py-10">
+        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   } else if (postStatus === 'succeeded') {
     content = (
-      <Grid container spacing={4}>
+      <div className="space-y-6">
         {posts.map((post) => (
-          <Grid item xs={12} key={post.id}>
+          <div key={post.id}>
             <Post post={post} />
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </div>
     );
   } else if (postStatus === 'failed') {
-    content = <p>Error loading posts</p>;
+    content = (
+      <p className="text-red-500 font-semibold text-center py-4">
+        Error loading posts.
+      </p>
+    );
   }
 
-  return <Container>{content}</Container>;
+  return <div className="max-w-3xl mx-auto px-4 py-6">{content}</div>;
 };
 
 export default PostsContainer;
-
