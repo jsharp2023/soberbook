@@ -1,0 +1,20 @@
+/*
+  The following directives require Tailwind CSS and PostCSS setup.
+  Make sure your project is configured to process these with PostCSS.
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+/* Custom styles */
+body {
+  background-color: #fff;
+  color: #1a202c;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0F1924;
+    color: #fff;
+  }
+}
